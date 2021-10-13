@@ -1,0 +1,78 @@
+---
+title: "Cell Asssay Analysis"
+author: "Benjamin Guthrie"
+date: "20211012"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/BG_Experiments/CellAssayAnalysis/code")
+```
+
+### Knitting params
+
+<style type="text/css">
+div.main-container {
+  max-width: 100% !important;
+}
+.tocify {
+  max-width: 100% !important;
+}
+.toc-content {
+  padding-left: 0px !important;
+}
+</style>
+
+
+### Libraries
+```{r}
+# This script is meant to be run after opening the Rproject file in the following directory: "~/BG_Experiments/CellAssayAnalysis". Use setwd() if this is not the case for you. 
+getwd()
+
+if("tidyverse" %in% rownames(installed.packages()) == FALSE)
+{install.packages("tidyverse")}
+if("data.table" %in% rownames(installed.packages()) == FALSE)
+{install.packages("data.table")}
+if("growthcurver" %in% rownames(installed.packages()) == FALSE)
+{install.packages("growthcurver")}
+if("lubridate" %in% rownames(installed.packages()) == FALSE)
+{install.packages("lubridate")}
+if("cowplot" %in% rownames(installed.packages()) == FALSE)
+{install.packages("cowplot")}
+if("gtools" %in% rownames(installed.packages()) == FALSE)
+{install.packages("gtools")}
+if("scales" %in% rownames(installed.packages()) == FALSE)
+{install.packages("scales")}
+
+library(tidyverse) #for data wrangling and plotting
+library(data.table) #for data wrangling
+library(growthcurver) #for modeling growth curves
+library(lubridate) #for converting dates and times into usable formats
+library(cowplot) #ggplot add on, multi pannel plots
+library(gtools) #for natural sorting
+library(scales) #for plotting
+
+```
+
+# File names and directories
+```{r}
+
+## START HERE to update for Cell Assays
+
+datadir = "../raw_data/20210630_2member_communities/"
+datafile1 = paste0(datadir, "20210630_2member_community.txt")
+metadata_file = paste0(datadir, "20210630_2member_communities_metadata.txt")
+
+# Create new processed_data folder
+new_directory <- sub(".*/raw_data/", "", datadir)
+dir.create(paste0("../processed_data/", new_directory))
+
+# Note: Would like to read in all files at once. Might need to call "tibble ()", like in Kathy's HPLC code. Or write a for loop around Cecilia's growth curve function?
+```
